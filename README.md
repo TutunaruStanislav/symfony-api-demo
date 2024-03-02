@@ -59,6 +59,11 @@ $ make db_migrate
 $ cat ./.docker/db/init/init_db_data.sql | docker exec -i symfony-api-postgres psql -U symfony -d symfony-api
 ```
 
+* generate jwt tokens:
+```bash
+$ make jwt
+```
+
 ### Service is available on:
 http://localhost:8888
 

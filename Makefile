@@ -35,23 +35,24 @@ app_bash:
 php:
 	${DOCKER_COMPOSE} exec -u www-data php-fpm bash
 test:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/phpunit
+	${DOCKER_COMPOSE} exec -u www-data php-fpm php bin/phpunit
 jwt:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console lexik:jwt:generate-keypair
+	${DOCKER_COMPOSE} exec -u www-data php-fpm php bin/console lexik:jwt:generate-keypair
 cache:
-	docker-compose -f ./docker-compose.yml exec -u www-data php-fpm bin/console cache:clear
-	docker-compose -f ./docker-compose.yml exec -u www-data php-fpm bin/console cache:clear --env=test
+	docker-compose -f ./docker-compose.yml exec -u www-data php-fpm php bin/console cache:clear
+	docker-compose -f ./docker-compose.yml exec -u www-data php-fpm php bin/console cache:clear --env=test
 
 ##################
 # Database
 ##################
 
 db_migrate:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console doctrine:migrations:migrate --no-interaction
+	${DOCKER_COMPOSE} exec -u www-data php-fpm php bin/console doctrine:migrations:migrate --no-interaction
 db_diff:
-	${DOCKER_COMPOSE} exec -u www-data php-fpm bin/console doctrine:migrations:diff --no-interaction
+	${DOCKER_COMPOSE} exec -u www-data php-fpm php bin/console doctrine:migrations:diff --no-interaction
 db_drop:
-	docker-compose -f ./docker-compose.yml exec -u www-data php-fpm bin/console doctrine:schema:drop --force
+	docker-compose -f ./docker-compose.yml exec -u www-data php-fpm php bin/console doctrine:schema:drop --force
+
 
 ##################
 # Static code analysis
