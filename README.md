@@ -56,7 +56,7 @@ $ composer install --no-interaction
 $ make db_migrate
 ```
 ```bash
-$ cat ./.docker/db/init/init_db_data.sql | docker exec -i symfony-api-postgres psql -U symfony -d symfony-api
+$ cat ./.docker/db/init/init_db_data.sql | docker exec -i <container_name> psql -U <POSTGRES_USER> -d <POSTGRES_DB>
 ```
 
 * generate jwt tokens:
