@@ -1,0 +1,36 @@
+security:
+  enable_authenticator_manager: true
+  password_hashers:
+    Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
+
+  providers:
+    users:
+      id: App\Core\Security\JwtUserProvider
+
+  firewalls:
+    api:
+      pattern: ^/api
+      stateless: true
+      entry_point: jwt
+      json_login:
+        check_path: api_login_check
+        success_handler: lexik_success_handler
+        failure_handler: lexik_jwt_authentication.handler.authentication_failure
+        username_path: phone
+      jwt: ~
+      refresh_jwt:
+        check_path: api_refresh_path
+
+  access_control:
+    - { path: ^/api/v1/auth/(login|refresh), roles: PUBLIC_ACCESS }
+    - { path: ^/api/doc, roles: PUBLIC_ACCESS }
+    - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+
+when@test:
+  security:
+    password_hashers:
+      Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface:
+        algorithm: auto
+        cost: 4
+        time_cost: 3
+        memory_cost: 10

@@ -1,0 +1,11 @@
+controllersGeo:
+  resource: ../../src/Geo/Infrastructure/Controller/
+  type: annotation
+
+controllersUsers:
+  resource: ../../src/Users/Infrastructure/Controller/
+  type: annotation
+
+kernel:
+  resource: ../../src/Kernel.php
+  type: annotation

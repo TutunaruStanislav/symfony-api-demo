@@ -1,0 +1,39 @@
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/.env
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+.composer
+docker-compose.yml
+/.idea/
+/.bash_history
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+/.phpunit.cache
+###< symfony/phpunit-bridge ###
+
+###> qossmic/deptrac-shim ###
+/.deptrac.cache
+###< qossmic/deptrac-shim ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> lexik/jwt-authentication-bundle ###
+/config/jwt/*.pem
+###< lexik/jwt-authentication-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###

@@ -1,0 +1,58 @@
+doctrine:
+  dbal:
+    connections:
+      default:
+        url: '%env(resolve:DATABASE_URL)%'
+    default_connection: default
+  orm:
+    auto_generate_proxy_classes: true
+    default_entity_manager: default
+    entity_managers:
+      default:
+        connection: default
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+          Core:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Core/Entity'
+            prefix: 'App\Core\Entity'
+            alias: Core
+          Geo:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Geo/Domain/Entity'
+            prefix: 'App\Geo\Domain\Entity'
+            alias: Geo
+          Users:
+            is_bundle: false
+            type: attribute
+            dir: '%kernel.project_dir%/src/Users/Domain/Entity'
+            prefix: 'App\Users\Domain\Entity'
+            alias: Users
+
+when@test:
+  doctrine:
+    dbal:
+      dbname_suffix: '_test%env(default::TEST_TOKEN)%'
+
+when@prod:
+  doctrine:
+    orm:
+      auto_generate_proxy_classes: false
+      proxy_dir: '%kernel.build_dir%/doctrine/orm/Proxies'
+      query_cache_driver:
+        type: pool
+        pool: doctrine.system_cache_pool
+      result_cache_driver:
+        type: pool
+        pool: doctrine.result_cache_pool
+
+  framework:
+    cache:
+      pools:
+        doctrine.result_cache_pool:
+          adapter: cache.app
+        doctrine.system_cache_pool:
+          adapter: cache.system

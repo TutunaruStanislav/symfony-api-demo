@@ -1,0 +1,97 @@
+nelmio_api_doc:
+  documentation:
+    info:
+      title: Symfony Api Demo
+      description: This App provides to get lists of cities and countries
+      version: 1.0.0
+    components:
+      securitySchemes:
+        bearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+      security:
+        - bearerAuth: [ ]
+      schemas:
+        JwtAuthResponse:
+          type: object
+          properties:
+            authToken:
+              type: string
+              example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDgyMzI5MDgsImV4cCI6MTcwODIzNjUwOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNzkwMDAwMDAwODIifQ.Gs1nry8aH2v1JIkrugDT4mHw_QwCwAiX3gUEVX9LZlGrjwZHWJYRMSg2sKaqud9YjyBhb6rzhowAGkHzQ2KQzdhvZg0J6rgsbMZ8FfLDu2nzBJA_QXaURJ8f4yfoZ-IlS4K0vRBHUBZT32YhGUiEgpV4bHIUJ_Rb5IfELGERT7XCtL1ncZIwWnKw8jBEXZ38QA-Mc8C5EJUxGofqV7ZlNHiW7gVMdM0kd5gOmTpzrxp7j3zpnFiQ4-lsGeIDDq0aRLXOoB1GvnGzF96KVplS1OAOgcYNA-d-owoFCmTzNUZM--ry7ZdWJrQAcwIDf8Iru-21K6TKyxmCYSQmQ21nXQ'
+            refreshToken:
+              type: string
+              example: '81047019a55ad0257430c5874281e7defdfc9ee05627aba028de91c3333cb6b67f62779065104824a15f16edc7ca5e3cfda61b32a7c5e735af8b8125ad26acce'
+            user:
+              $ref: '#/components/schemas/UserModel'
+    paths:
+      /api/v1/auth/login:
+        post:
+          tags:
+            - security
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    phone:
+                      type: string
+                    password:
+                      type: string
+          parameters:
+            - name: X-Access-Token
+              in: header
+              required: true
+              schema:
+                type: string
+                default: '3dbe06033befda5cc41c5fa2197efcb6'
+          responses:
+            '201':
+              description: OK
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/JwtAuthResponse'
+            '403':
+              description: common errors
+      /api/v1/auth/refresh:
+        post:
+          tags:
+            - security
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    refreshToken:
+                      type: string
+          parameters:
+            - name: X-Access-Token
+              in: header
+              required: true
+              schema:
+                type: string
+                default: '3dbe06033befda5cc41c5fa2197efcb6'
+          responses:
+            '201':
+              description: OK
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      authToken:
+                        type: string
+                        example: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3MDgyMzI5MDgsImV4cCI6MTcwODIzNjUwOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoiNzkwMDAwMDAwODIifQ.Gs1nry8aH2v1JIkrugDT4mHw_QwCwAiX3gUEVX9LZlGrjwZHWJYRMSg2sKaqud9YjyBhb6rzhowAGkHzQ2KQzdhvZg0J6rgsbMZ8FfLDu2nzBJA_QXaURJ8f4yfoZ-IlS4K0vRBHUBZT32YhGUiEgpV4bHIUJ_Rb5IfELGERT7XCtL1ncZIwWnKw8jBEXZ38QA-Mc8C5EJUxGofqV7ZlNHiW7gVMdM0kd5gOmTpzrxp7j3zpnFiQ4-lsGeIDDq0aRLXOoB1GvnGzF96KVplS1OAOgcYNA-d-owoFCmTzNUZM--ry7ZdWJrQAcwIDf8Iru-21K6TKyxmCYSQmQ21nXQ'
+                      refreshToken:
+                        type: string
+                        example: '81047019a55ad0257430c5874281e7defdfc9ee05627aba028de91c3333cb6b67f62779065104824a15f16edc7ca5e3cfda61b32a7c5e735af8b8125ad26acce'
+            '403':
+              description: common errors
+  areas:
+    path_patterns:
+      - ^/api/v1
