@@ -23,10 +23,10 @@ cd symfony-api-demo
 
 * create local configs for docker:
 ```bash
-$ cp .docker/.env.dist .env
+cp .docker/.env.dist .env
 ```
 ```bash
-$ cp .docker/docker-compose.dev.yml docker-compose.yml
+cp .docker/docker-compose.dev.yml docker-compose.yml
 ```
 
 * set your credentials (db, etc..)
@@ -35,33 +35,33 @@ $ cp .docker/docker-compose.dev.yml docker-compose.yml
 
 * build containers:
 ```bash
-$ make dc_build
+make dc_build
 ```
 
 * run containers:
 ```bash
-$ make dc_up
+make dc_up
 ```
 
 * enter into container and install dependencies:
 ```bash
-$ make app_bash
+make app_bash
 ```
 ```bash
-$ composer install --no-interaction
+composer install --no-interaction
 ```
 
 * apply db migrations and load dump with data into db:
 ```bash
-$ make db_migrate
+make db_migrate
 ```
 ```bash
-$ cat ./.docker/db/init/init_db_data.sql | docker exec -i <container_name> psql -U <POSTGRES_USER> -d <POSTGRES_DB>
+cat ./.docker/db/init/init_db_data.sql | docker exec -i <container_name> psql -U <POSTGRES_USER> -d <POSTGRES_DB>
 ```
 
 * generate jwt tokens:
 ```bash
-$ make jwt
+make jwt
 ```
 
 ### Service is available on:
