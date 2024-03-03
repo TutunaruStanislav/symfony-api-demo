@@ -70,6 +70,9 @@ http://localhost:8888
 ### Documentation:
 http://localhost:8888/api/doc
 
+### Demo user:
+79000000082 / password
+
 ### Author:
 Stanislav Tutunaru
 
