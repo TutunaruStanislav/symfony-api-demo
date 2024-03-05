@@ -9,25 +9,10 @@ parameters:
       collectors:
         - type: directory
           regex: /src/Geo/.*
-    - name: Lkp
-      collectors:
-        - type: directory
-          regex: /src/Lkp/.*
-    - name: Pages
-      collectors:
-        - type: directory
-          regex: /src/Pages/.*
-    - name: Yandex
-      collectors:
-        - type: directory
-          regex: /src/Yandex/.*
     - name: Users
       collectors:
         - type: directory
           regex: /src/Users/.*
   ruleset:
     Geo:
-    Lkp:
-    Pages:
-    Yandex:
     Users:

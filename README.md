@@ -64,6 +64,20 @@ cat ./.docker/db/init/init_db_data.sql | docker exec -i <container_name> psql -U
 make jwt
 ```
 
+* you can use quality tools and tests as well:
+```bash
+make cs_fix
+```
+```bash
+make phpstan
+```
+```bash
+make deptrac
+```
+```bash
+make test
+```
+
 ### Service is available on:
 http://localhost:8888
 
